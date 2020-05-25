@@ -7,29 +7,31 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
 
 import com.openpojo.reflection.PojoClass;
+import com.openpojo.reflection.PojoClassFilter;
 import com.openpojo.reflection.impl.PojoClassFactory;
 
-@@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
 public class RelogioApplicationTest {
 
-	public static final String PACKAGE = "br.com.relogio";
+	public static final String PACKAGE = "com.br.relogio";
 	public static final List<String> PACKAGE_EXCLUDES = Arrays.asList(
-			"br.com.relogio.RelogioApplication",
-			"br.com.relogio.api",
-			"br.com.relogio.config",
-			"br.com.relogio.controller",
-			"br.com.relogio.domain",
-			"br.com.relogio.enums",
-			"br.com.relogio.exception",
-			"br.com.relogio.mock",
-			"br.com.relogio.repository",
-			"br.com.relogio.utils"
+			"com.br.relogio.RelogioApplication",
+			"com.br.relogio.api",
+			"com.br.relogio.config",
+			"com.br.relogio.controller",
+			"com.br.relogio.domain",
+			"com.br.relogio.enums",
+			"com.br.relogio.exception",
+			"com.br.relogio.mock",
+			"com.br.relogio.repository",
+			"com.br.relogio.utils"
 			);
 	public static final String SUFIXO = "Test";
 
@@ -51,7 +53,7 @@ public class RelogioApplicationTest {
 				return packageValid(pojoClass.getPackage().getName())
 						&& !pojoClass.getSourcePath().contains("/test-classes/") && !pojoClass.isEnum()
 						&& !pojoClass.isNestedClass() && !pojoClass.isInterface() && !pojoClass.isAbstract()
-						&& Objeto.isBlank(pojoClass.getAnnotation(Ignore.class));
+						&& Objects.isNull(pojoClass.getAnnotation(Ignore.class));
 			}
 		});
 		System.out.println("---------------------------------------------------------------------");
@@ -84,14 +86,6 @@ public class RelogioApplicationTest {
 			System.out.println(mensagemFormatada);
 			for (PojoClass pj : semTest) {
 				System.out.println(pj.getName());
-				System.out.println(" \n\n\n" + " package " + pj.getPackage().getName() + ";\n"
-						+ " import org.springframework.boot.test.IntegrationTest; \n import org.springframework.test.context.web.WebAppConfiguration; \n import org.junit.runner.RunWith; \n"
-						+ " import org.springframework.boot.test.SpringApplicationConfiguration;     \n"
-						+ " import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  \n"
-						+ " import br.com.conductor.pier.Aplicacao;  \n" + " import junit.framework.TestCase; \n" + "\n"
-						+ " @RunWith(SpringRunner.class)    \n"
-						+ " @SpringBootTest(classes = Aplicacao.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)     \n @IntegrationTest  @WebAppConfiguration \n "
-						+ " public class " + pj.getClazz().getSimpleName() + "Test {  \n" + "    \n" + " }  \n");
 			}
 			System.out.println("---------------------------------------------------------------------");
 		} else {
@@ -112,13 +106,6 @@ public class RelogioApplicationTest {
 			parametros[1] = "classes";
 		}
 		return parametros;
-	}
-	
-	private boolean objectIsBlank(<?> object) {
-		
-		
-		
-		return true;
 	}
 	
 }
