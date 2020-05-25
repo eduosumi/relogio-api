@@ -1,0 +1,24 @@
+
+
+
+#spring:
+#  h2.console.enabled: true
+#  datasource:
+#    url: jdbc:h2:mem:mydb
+#    driverClassName: org.h2.Driver
+#  jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+app:
+  resttemplate:
+    timeout: 30000
+
+externo:
+  api:
+    marca:
+      host: http://localhost:8080/mock
+      paths:
+        listar-enderecos: /marcas/%s/enderecos
+
+info:
+  build:
+    version: '@project.version@'
